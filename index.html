@@ -114,23 +114,14 @@
 
                         this.thankYou = true;
 
-                        this.WarningToggle()
+                        this.WarningToggle(false)
                     } else {
-                        this.WarningToggle();
+                        this.WarningToggle(true);
                     }
                 },
 
-                WarningToggle() {
-
-                    if (this.submitScore <= 0 && this.warning == true) {
-                        this.warning = true;
-                    } else if (this.warning) {
-                        this.warning = false;
-                    } else {
-                        this.warning = true;
-                    }
-
-                    // setTimeout(this.warning = false, 5000)
+                WarningToggle(value) {
+                    this.warning = value
                 }
             },
         }).mount('#app')
