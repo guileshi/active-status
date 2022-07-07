@@ -1,0 +1,184 @@
+@import "./_colors";
+@import "./_typefaces";
+@import "./_animations";
+
+@mixin flex($justify) {
+    display: flex;
+    justify-content: $justify;
+    align-items: center;
+}
+
+.card {
+    // 600px
+    width: 25rem;
+    height: auto;
+
+    padding: 32px;
+
+    border-radius: 32px;
+
+    background: linear-gradient(45deg, #171E28 0%, #1E252F 100%);
+
+    transform: translateY(-20px);
+    opacity: 0;
+
+    animation: slide 0.6s ease-out forwards;
+
+    .star {
+        @include flex(center);
+
+        height: 45px;
+        width: 45px;
+
+        border-radius: 100%;
+
+        background-color: $lightblack;
+    }
+
+    h1 {
+        margin-top: 32px;
+        margin-bottom: 12px;
+
+        font-size: 25px;
+        font-weight: $bold;
+        color: $white;
+    }
+
+    p {
+        font-size: 15px;
+        font-weight: $regular;
+        color: $grey;
+        line-height: 22px;
+    }
+
+    .rating {
+        @include flex(space-between);
+
+        margin: 24px auto;
+
+        width: 100%;
+
+        button {
+            @include flex(center);
+
+            background-color: $lightblack;
+            color: $grey;
+
+            width: 45px;
+            height: 45px;
+
+            border-radius: 100%;
+
+            cursor: pointer;
+
+            transition: all 0.2s;
+
+            &:hover {
+                background-color: $grey;
+                color: $white;
+
+                transform: scale(1.10);
+            }
+
+            &:active {
+                background-color: $base;
+                color: $white;
+
+                transform: scale(0.95);
+            }
+        }
+
+        button.active {
+            background-color: $base;
+            color: $white;
+
+            &:hover {
+                background-color: $darkbase;
+            }
+        }
+    }
+
+    // submit button
+    .submit {
+        background-color: $base;
+
+        font-weight: $regular;
+        font-size: 15px;
+        color: $white;
+
+        width: 100%;
+
+        padding: 12px;
+
+        border-radius: 24px;
+
+        text-transform: uppercase;
+
+        letter-spacing: 3px;
+
+        transition: all 0.2s;
+
+        cursor: pointer;
+
+        // hover
+        &:hover {
+            background-color: $white;
+            color: $base;
+
+            transform: scale(1.05);
+        }
+
+        // active
+        &:active {
+            background-color: $white;
+            color: $base;
+            transform: scale(0.95);
+        }
+    }
+
+    .scoreImage {
+        @include flex(center);
+
+        margin-bottom: 32px;
+    }
+
+    .scoreSelected {
+        @include flex(center);
+
+        div {
+            width: auto;
+
+            display: inline-flex;
+
+            padding: 6px 16px;
+            
+            border-radius: 24px;
+
+            background-color: $lightblack;
+            color: $darkbase;
+        }
+    }
+}
+
+.card#thankYou {
+
+    p,
+    h1 {
+        text-align: center;
+    }
+
+    p{
+        margin-bottom: 4px;
+    }
+}
+
+/* sm */
+@media (max-width: 767.98px) {
+    .card {
+        width: auto;
+
+        margin: auto 16px;
+
+        padding: 32px 16px;
+    }
+}

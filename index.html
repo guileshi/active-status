@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Active Status</title>
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+
+    <link rel="stylesheet" href="scss/main.css">
+
+    <link rel="stylesheet" href="scss/card.css">
+
+    <link rel="stylesheet" href="scss/warning.css">
+</head>
+
+<body>
+
+    <div id="app">
+        <article class="card" id="ratingUs" v-if="ratingUs">
+            <div class="star">
+                <img src="img/icon-star.svg" alt="A star">
+            </div>
+            <h1>
+                How did we do?
+            </h1>
+            <p>
+                Please let us know how we did with your support request. All feedback is appreciated to help us improve
+                our offering!
+            </p>
+            <div class="rating">
+                <button type="button" class="ratingButton" id="button1" @click="ActiveOnClick('button1', 1)">
+                    1
+                </button>
+                <button type="button" class="ratingButton" id="button2" @click="ActiveOnClick('button2', 2)">
+                    2
+                </button>
+                <button type="button" class="ratingButton" id="button3" @click="ActiveOnClick('button3', 3)">
+                    3
+                </button>
+                <button type="button" class="ratingButton" id="button4" @click="ActiveOnClick('button4', 4)">
+                    4
+                </button>
+                <button type="button" class="ratingButton" id="button5" @click="ActiveOnClick('button5', 5)">
+                    5
+                </button>
+            </div>
+
+            <button type="button" class="submit" @click="Submit">
+                Submit
+            </button>
+        </article>
+
+        <article class="card" id="thankYou" v-if="thankYou">
+            <div class="scoreImage">
+                <img src="img/illustration-thank-you.svg" alt="A cellphone with a form and a credit card orange">
+            </div>
+            <div class="scoreSelected">
+                <div>
+                    You selected {{submitScore}} out of 5
+
+                </div>
+            </div>
+            <h1 class="scoreTitle">
+                Thank you!
+            </h1>
+            <p>
+                We appreciate you taking the time to give a rating.
+                If you ever need more support, don’t hesitate to get in touch!
+            </p>
+        </article>
+
+        <div class="warning" v-if="warning">
+            <p>Rate us first, and then click in Submit.</p>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@3"></script>
+
+    <script type="module">
+        const { createApp } = Vue
+        // import AbilityBar from './components/abilityBar.js'
+
+
+        createApp({
+            data() {
+                return {
+                    submitScore: 0,
+                    ratingUs: true,
+                    thankYou: false,
+                    warning: false
+                }
+            },
+
+            methods: {
+                ActiveOnClick(id, value) {
+                    var button = document.querySelectorAll('.ratingButton');
+
+                    for (var i = 0; i < button.length; i++) {
+                        if (button[i].classList.contains('active')) {
+                            button[i].classList.remove('active');
+                        }
+                    }
+
+                    document.getElementById(id).classList.add('active');
+
+                    this.submitScore = value;
+                },
+
+                Submit() {
+                    if (this.submitScore >= 1) {
+                        this.ratingUs = false;
+
+                        this.thankYou = true;
+
+                        this.WarningToggle()
+                    } else {
+                        this.WarningToggle();
+                    }
+                },
+
+                WarningToggle() {
+
+                    if (this.submitScore <= 0 && this.warning == true) {
+                        this.warning = true;
+                    } else if (this.warning) {
+                        this.warning = false;
+                    } else {
+                        this.warning = true;
+                    }
+
+                    // setTimeout(this.warning = false, 5000)
+                }
+            },
+        }).mount('#app')
+    </script>
+
+</body>
+
+</html>
